@@ -1,0 +1,56 @@
+<div class="container">
+   <div class="col-md-12"> 
+   		<h1>Product List</h1>
+   		<table class="table table-bordered table-striped table-hover">
+   			<thead>
+   				<tr>
+   					<th class="text-center">ID</th>
+   					<th class="text-center">Name</th>
+   					<th class="text-center">Description</th>
+   					<th class="text-center">Price</th>
+   					<th class="text-center">&nbsp;</th>
+   				</tr>
+   			</thead>
+   			<tbody>
+   				<tr *ngFor="let product of products">
+   					<td>{{ product.id }}</td>
+   					<td>{{ product.name }}</td>
+   					<td>{{ product.description }}</td>
+   					<td>{{ product.price | currency:'USD':true:'1.0-2'}}</td>
+   					<td>
+   						<button class="btn btn-primary" (click)="showEditProductForm(product)">Edit</button>
+   						<button class="btn btn-primary" (click)="removeProduct(product)">Remove</button>
+   					</td>
+   				</tr>
+   			</tbody>	
+   		</table>
+
+   		<button class="btn btn-primary" (click)="showNewProductForm()">Add New</button>
+   		<br/>
+   		<br/>
+
+   		<form *ngIf="productForm">
+   			<h2>Add New Product</h2>
+   			<p>ID: <input type="text" name="ID" [(ngModel)]="newProduct.id"></p>
+   			<p>Name: <input type="text" name="Name" [(ngModel)]="newProduct.name"></p>
+   			<p>Description: <input type="text" name="Description" [(ngModel)]="newProduct.description"></p>
+   			<p>Price: <input type="text" name="Price" [(ngModel)]="newProduct.price"></p>
+   			<p>
+   				<button class="btn btn-primary" (click)="saveProduct(newProduct)">Submit</button>
+   				<button class="btn btn-primary" (click)="cancelNewForm()">cancel</button>
+   			</p>
+   		</form>
+
+   		<form *ngIf="editproductForm">
+   			<h2>Edit Product Details</h2>
+   			<p>ID: <input type="text" name="ID" [(ngModel)]="editedProduct.id"></p>
+   			<p>Name: <input type="text" name="Name" [(ngModel)]="editedProduct.name"></p>
+   			<p>Description: <input type="text" name="Description" [(ngModel)]="editedProduct.description"></p>
+   			<p>Price: <input type="text" name="Price" [(ngModel)]="editedProduct.price"></p>
+   			<p>
+   				<button class="btn btn-primary" (click)="updateProduct(editedProduct)">Submit</button>
+   				<button class="btn btn-primary"(click)="cancelEditForm()">cancel</button>
+   			</p>
+   		</form>
+   </div>
+</div>
